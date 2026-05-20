@@ -5,7 +5,7 @@ import morgan from "morgan";
 import cors from "cors";
 import path from "path";
 
-import routes from "./routes/userRoutes.js";
+import routes from "./routes/userroutes.js";
 
 dotenv.config();
 
