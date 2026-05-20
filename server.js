@@ -10,30 +10,18 @@ dotenv.config();
 
 const app = express();
 
+
 app.use(express.json());
 app.use(morgan("dev"));
 
-/* ---------------- CORS SETUP ---------------- */
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://jsl-frontend.vercel.app",
-  process.env.CLIENT_URL,
-].filter(Boolean);
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // allow server-to-server or Postman (no origin)
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-
-      // fallback (prevents production crash)
-      return callback(null, true);
-    },
+    origin: [
+      "http://localhost:5173",
+      "https://jsl-frontend.vercel.app",
+    ],
     credentials: true,
   })
 );
@@ -45,9 +33,8 @@ app.use("/api/users", routes);
 
 
 app.get("/", (req, res) => {
-  res.send("Backend API is running 🚀");
+  res.send("Backend API is running ");
 });
-
 
 
 mongoose
